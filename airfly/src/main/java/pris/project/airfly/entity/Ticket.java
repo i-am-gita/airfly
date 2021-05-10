@@ -61,4 +61,14 @@ public class Ticket {
 		this.flight = flight;
 	}
 
+	public Userr getUser() {
+		return user;
+	}
+
+	public void setUser(Userr user) {
+		this.user = user;
+	}
+	
+	
+
 }

@@ -101,7 +101,6 @@ public class AuthController {
 			Role userRole = roleRepository.findByDescription(ERole.ROLE_PASSANGER)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 			roles.add(userRole);
-			System.out.println(userRole.getDescription());
 		} else {
 			strRoles.forEach(role -> {
 				switch (role) {
