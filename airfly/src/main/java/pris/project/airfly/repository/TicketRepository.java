@@ -11,8 +11,8 @@ import pris.project.airfly.entity.Ticket;
 
 public interface TicketRepository extends JpaRepository<Ticket, Integer>{
 
-	@Query("SELECT t FROM Ticket t WHERE t.flight = :flight")
-	Ticket findByFlight(@Param("flight")Flight flight);
+	@Query("SELECT t FROM Ticket t WHERE t.flight = :flight AND t.user.userid = :admin")
+	Ticket findByFlight(@Param("flight")Flight flight, int admin);
 	
 	@Query("SELECT t FROM Ticket t WHERE t.user.userid = :userId")
 	List<Ticket> findByUser(@Param("userId")Integer id);

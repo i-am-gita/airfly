@@ -26,6 +26,7 @@ public class Ticket {
 	@ManyToOne
 	@JoinColumn(name="flight_flightid")
 	private Flight flight;
+	
 	public Ticket() {
 	}
 
