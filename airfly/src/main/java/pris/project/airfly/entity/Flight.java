@@ -35,12 +35,45 @@ public class Flight {
 	@ManyToOne
 	@JoinColumn(name="destination_destinationid")
 	private Destination destination;
-
-//	@OneToMany(mappedBy="flight")
-//	private List<Ticket> tickets;
+	
+	@ManyToOne
+	@JoinColumn(name="plane_planeid")
+	private Plane plane;
 
 	public Flight() {
 	}
+	
+	
+
+	public int getTypee() {
+		return typee;
+	}
+
+
+
+	public void setTypee(int typee) {
+		this.typee = typee;
+	}
+
+
+
+	public Plane getPlane() {
+		return plane;
+	}
+
+
+
+	public void setPlane(Plane plane) {
+		this.plane = plane;
+	}
+
+
+
+	public void setTakeoffdate(Date takeoffdate) {
+		this.takeoffdate = takeoffdate;
+	}
+
+
 
 	public int getFlightid() {
 		return this.flightid;

@@ -50,8 +50,14 @@ public class TicketController {
 	public ResponseEntity<Boolean> checkDiscount(HttpServletRequest request, @RequestParam("userId") String userId) throws ParseException {	
 		Integer id = Integer.parseInt(userId);
 		List<Ticket> usersTickets = ticketRepository.findByUser(id);
-		System.out.println(usersTickets.size() % 5 == 0);
-		return new ResponseEntity<Boolean>(usersTickets.size() % 5 == 0, HttpStatus.OK);
+		
+		boolean discount = false;
+		
+		if(usersTickets.size() % 5 == 0 && usersTickets.size()>0) {
+			discount = true;
+		}
+		
+		return new ResponseEntity<Boolean>(discount, HttpStatus.OK);
 	}
 	
 	@PostMapping(value="/createFlightTicket", produces = MediaType.APPLICATION_JSON_VALUE)

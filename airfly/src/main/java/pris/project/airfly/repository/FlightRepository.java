@@ -11,7 +11,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import pris.project.airfly.entity.Flight;
-import pris.project.airfly.entity.Ticket;
 
 
 @Repository
