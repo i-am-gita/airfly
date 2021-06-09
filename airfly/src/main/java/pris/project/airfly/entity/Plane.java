@@ -26,8 +26,11 @@ public class Plane {
 	@JoinColumn(name="airline_airlineid")
 	private Airline airline;
 	
-	@OneToMany(mappedBy="plane")
-	private List<Photo> photos;
+//	@OneToMany(mappedBy = "plane")
+//	private List<Flight> flights;
+	
+//	@OneToMany(mappedBy="plane")
+//	private List<Photo> photos;
 	
 	public Plane() {
 	}
@@ -64,11 +67,11 @@ public class Plane {
 		this.airline = airline;
 	}
 
-	public List<Photo> getPhotos() {
-		return this.photos;
-	}
-
-	public void setPhotos(List<Photo> photos) {
-		this.photos = photos;
-	}
+//	public List<Photo> getPhotos() {
+//		return this.photos;
+//	}
+//
+//	public void setPhotos(List<Photo> photos) {
+//		this.photos = photos;
+//	}
 }

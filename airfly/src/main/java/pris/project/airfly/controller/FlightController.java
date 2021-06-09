@@ -5,7 +5,11 @@ package pris.project.airfly.controller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pris.project.airfly.dto.FlightDTO;
+import pris.project.airfly.dto.FlightWithPriceDTO;
 import pris.project.airfly.dto.NewFlightDTO;
 import pris.project.airfly.entity.Airline;
 import pris.project.airfly.entity.Airport;
@@ -106,8 +111,37 @@ public class FlightController {
 	
 	@GetMapping(value="/getAllFlights", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Flight>> getFlights(){
-
 		return new ResponseEntity<List<Flight>>(flightRepository.findAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getSortedFlights", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<FlightWithPriceDTO>> getSortedFlights(){
+		
+		List<Flight> allFlights = flightRepository.findAll();
+		List<FlightWithPriceDTO> sortedFlights = new ArrayList<>();
+		
+		for(Flight flight : allFlights) {
+			Ticket ticket = ticketRepository.findByFlight(flight, 1);
+			
+			FlightWithPriceDTO mappedFlight = new FlightWithPriceDTO();
+			mappedFlight.setAirline(flight.getAirline());
+			mappedFlight.setAvailabletickets(flight.getAvailabletickets());
+			mappedFlight.setDestination(flight.getDestination());
+			mappedFlight.setFlightid(flight.getFlightid());
+			mappedFlight.setPlane(flight.getPlane());
+			mappedFlight.setTakeoffdate(flight.getTakeoffdate());
+			mappedFlight.setTypee(flight.getType());
+			if(ticket != null) {
+				mappedFlight.setTicketPrice(ticket.getPriceeconomics());
+			} else {
+				System.err.println("YOYOYO");
+			}
+			sortedFlights.add(mappedFlight);
+		}
+		
+		Collections.sort(sortedFlights, Collections.reverseOrder());
+
+		return new ResponseEntity<List<FlightWithPriceDTO>>(sortedFlights, HttpStatus.OK);
 	}
 	
 	@PostMapping(value="/getFlightsForGoingDate", produces = MediaType.APPLICATION_JSON_VALUE)

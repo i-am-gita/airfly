@@ -1,5 +1,8 @@
 package pris.project.airfly.entity;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +19,8 @@ public class Rating {
 	private Integer id;
 	
 	private Integer grade;
+	
+	private LocalDateTime date;
 	
 	@ManyToOne
 	@JoinColumn(name="airline_airlineid")
@@ -35,6 +40,16 @@ public class Rating {
 	}
 	
 	
+	
+	
+
+	public LocalDateTime getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
 
 	public Userr getUser() {
 		return user;

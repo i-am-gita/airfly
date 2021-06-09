@@ -22,6 +22,7 @@ public class Photo {
 	@ManyToOne
 	@JoinColumn(name="plane_planeid")
 	private Plane plane;
+	
 	public Photo() {
 	}
 

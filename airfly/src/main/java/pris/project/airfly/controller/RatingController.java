@@ -2,6 +2,8 @@ package pris.project.airfly.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,12 +47,14 @@ public class RatingController {
 		Rating currentRating = ratingRepository.checkRatingForUser(rating.getAirlineId(), rating.getUserId());
 		if(currentRating != null) {
 			currentRating.setGrade(rating.getRating());
+			currentRating.setDate(LocalDateTime.now());
 			ratingRepository.save(currentRating);
 		} else {
 			Rating newRating = new Rating();
 			newRating.setAirline(airlineRepository.findById(rating.getAirlineId()).get());
 			newRating.setUser(userRepository.findById(rating.getUserId()).get());
 			newRating.setGrade(rating.getRating());
+			newRating.setDate(LocalDateTime.now());
 			ratingRepository.save(newRating);
 		}
 		
